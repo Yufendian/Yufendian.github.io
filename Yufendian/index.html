@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			table{
+				border: 1px solid blue;
+				border-collapse: collapse;
+			}
+			td{
+				border: 1px solid blue;
+				width: 100px;
+				height: 60px;
+			}
+			tr:nth-child(1)>td{
+				background-color: hsl(120,50%,50%);
+			}
+			tr:nth-child(2)>td{
+				background-color: hsl(120,50%,60%);
+			}
+			tr:nth-child(3)>td{
+				background-color: hsl(120,50%,70%);
+			}
+			tr:nth-child(4)>td{
+				background-color: hsl(120,50%,80%);
+			}
+			tr:nth-child(5)>td{
+				background-color: hsl(120,50%,90%);
+			}
+			tr:nth-child(6)>td{
+				background-color: hsl(120,50%,100%);
+			}
+		</style>
+	</head>
+	<body>
+		<table id="colorTable">
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<script type="text/javascript">
+				var oTable = document.getElementById("colorTable");
+				var oTd =document.getElementsByTagName("td");
+//				for (i in oTd) {
+//					oTd[i].style.backgroundColor="hsl("+i%9*20+",50%,50%)";
+//					oTd[i].innerHTML=i;
+//				}
+				var c=0;
+				function runColor(){
+					c+=1;
+					for(i in oTd){
+						if(!isNaN(i)){
+							oTd[i].innerHTML=i;
+							oTd[i].style.backgroundColor="hsl("+(i+c)%9*10+",50%,50%)";
+						}
+					}
+				}
+				setInterval(runColor,100);
+			</script>
+		</table>
+		
+	</body>
+</html>
