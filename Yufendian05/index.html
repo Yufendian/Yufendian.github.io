@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+.zoomPic {
+	width: 300px;
+	margin: 30px;
+	
+}
+
+.zoomHandler {
+	position: fixed;
+    border-radius: 50%;
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+	
+}</style>
+	</head>
+
+	<body>
+		<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538243500439&di=9cd8357da9bff87a447aa1068fed558c&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D4d52247dfc246b606f03ba3783917039%2F0d338744ebf81a4ca25496e7dd2a6059252da6be.jpg" class="zoomPic" />
+		<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538243522818&di=6f7d3f2fc55576706d4bfa5c56fa00b4&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2Fb5e89fadfc2c2844.jpg" class="zoomPic" />
+		<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538243542441&di=bf00f51356592d62dbfc814e838afac6&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fd439b6003af33a87d965163ccc5c10385343b58f.jpg" class="zoomPic" />
+		<script type="text/javascript">(function() {
+	var ratio = [];
+	var winWidth = window.innerWidth;
+	var winHeight = window.innerHeight;
+	var zoom = document.querySelectorAll('.zoomPic');
+	if(zoom.length == 0) {
+		return false;
+	}
+	var zoomHandler = document.createElement('div');
+	zoomHandler.className = 'zoomHandler';
+	document.body.appendChild(zoomHandler);
+
+	for(var i = 0; i < zoom.length; i++) {
+
+		zoom[i].addEventListener("load", (function(n) {
+			return function() {
+				ratio[n] = zoom[n].naturalWidth / zoom[n].width;
+			}
+		})(i));
+
+		zoom[i].addEventListener("mousemove", (function(n) {
+			return function(event) {
+
+				if(ratio[n] <= 1) {
+					return false;
+				}
+
+				var event = event || window.event;
+				var target = event.target || event.srcElement;
+				//x,y 相对于浏览器的位置
+				var cx = event.clientX;
+				var cy = event.clientY;
+				//ox,oy 相对于图像的位置
+				var ox = event.offsetX || event.layerX;
+				var oy = event.offsetY || event.layerY;
+
+				var zoomShowWidth = 100;
+				var zoomShowHeight = 100;
+
+				zoomHandler.style.width = zoomShowWidth + "px";
+				zoomHandler.style.height = zoomShowHeight + "px";
+				zoomHandler.style.left = cx + "px";
+				zoomHandler.style.top = cy + "px";
+				zoomHandler.style.backgroundImage = 'url(' + target.src + ')';
+				zoomHandler.style.backgroundPosition = (-ratio[n] * ox + zoomShowWidth / 2) + "px " + (-ratio[n] * oy + zoomShowHeight / 2) + "px";
+				zoomHandler.style.display = "block";
+			}
+		})(i));
+		zoom[i].addEventListener("mouseout", function() {
+			zoomHandler.style.display = "none";
+		});
+	}
+
+})();</script>
+	</body>
+
+</html>
